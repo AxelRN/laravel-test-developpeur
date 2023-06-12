@@ -49,7 +49,33 @@ class PlageController extends Controller
         $plage->description = $request->description;
 
         $plage->save();
-        return redirect()->route('plages.index')->with('success','Plage ajouté');
+        return redirect()->route('plages.index')->with('success','La plage '.$plage->name.' a été ajouté');
         
+    }
+
+    public function edit($id){
+
+        $plage = Plage::findOrFail($id);
+        $communes = Commune::orderby('name')->get();
+
+        return view('plages.edit',['plage'=>$plage,'communes'=>$communes]);
+
+    }
+
+    public function update(Request $request, Plage $plage){
+
+        $request->validate([
+            'name' => 'required',
+            'zip' => 'required',
+        ]);
+
+        $plage = Plage::find($request->hidden_id);
+        $plage->name = $request->name;
+        $plage->zip = $request->zip;
+        $plage->description = $request->description;
+
+        $plage->save();
+        return redirect()->route('plages.index')->with('success','La plage '.$plage->name.' a été modifié');
+
     }
 }

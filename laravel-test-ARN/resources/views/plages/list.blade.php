@@ -6,9 +6,9 @@
         
         <form class="col-6" method="get" action="{{ route('plages.index') }}" accept-charset="UTF-8" role="search">
             <div class="input-group mb-3">
-                <input type="text" name="search" class="form-control" placeholder="Chercher une plage..." value="{{ request('search') }}">
+                <input type="text" name="search" class="form-control" placeholder="Trouver une plage..." value="{{ request('search') }}">
                 <div class="input-group-append">
-                        <button type="submit" class="btn btn-primary">Search</button>
+                        <button type="submit" class="btn btn-primary">Rechercher</button>
                 </div>
             </div>
         </form>
@@ -36,7 +36,7 @@
                             <td>{{$plage->commune_name}}</td>
                             <td>{!!$plage->description!!}</td>
                             <td>
-                                <a href="edit.html" class="btn btn-primary">Modifier</a>
+                                <a href="{{ route('plages.edit', $plage->id) }}" class="btn btn-primary">Modifier</a>
                                 <button type="button" class="btn btn-danger">Supprimer</button>
                             </td>
                         </tr>
@@ -47,25 +47,9 @@
             </tbody>
         </table>
 
-
-        <div class="d-none flex-sm-fill d-sm-flex align-items-sm-center justify-content-sm-between">
-            <div>
-                <p class="small text-muted">
-                    Showing
-                    <span class="fw-semibold">1</span>
-                    to
-                    <span class="fw-semibold">5</span>
-                    of
-                    <span class="fw-semibold">72</span>
-                    results
-                </p>
-            </div>
-
-            <div>
-                {{ $plages->links('layouts.pagination') }}
+        {{ $plages->links('layouts.pagination') }}
                 
-            </div>
-        </div>
+            
     </section>
 
 @endsection
