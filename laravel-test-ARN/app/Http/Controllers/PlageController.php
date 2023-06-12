@@ -49,7 +49,7 @@ class PlageController extends Controller
         $plage->description = ''.$request->description;
 
         $plage->save();
-        return redirect()->route('plages.index')->with('success','La plage '.$plage->name.' a été ajouté');
+        return redirect()->route('plages.index')->with('success','La plage '.$plage->name.' a été ajoutée');
         
     }
 
@@ -72,10 +72,10 @@ class PlageController extends Controller
         $plage = Plage::find($request->hidden_id);
         $plage->name = $request->name;
         $plage->zip = $request->zip;
-        $plage->description = $request->description;
+        $plage->description = ''.$request->description;
 
         $plage->save();
-        return redirect()->route('plages.index')->with('success','La plage '.$plage->name.' a été modifié');
+        return redirect()->route('plages.index')->with('success','La plage '.$plage->name.' a été modifiée');
 
     }
 
@@ -84,7 +84,7 @@ class PlageController extends Controller
         $plage = Plage::findOrFail($id);
 
         $plage->delete();
-        return redirect()->route('plages.index')->with('success','La plage '.$plage->name.' a été supprimé');
+        return redirect()->route('plages.index')->with('success','La plage '.$plage->name.' a été supprimée');
 
     }
 }
