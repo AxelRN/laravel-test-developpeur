@@ -37,7 +37,11 @@
                             <td>{!!$plage->description!!}</td>
                             <td>
                                 <a href="{{ route('plages.edit', $plage->id) }}" class="btn btn-primary">Modifier</a>
-                                <button type="button" class="btn btn-danger">Supprimer</button>
+                                <form method="post" action="{{route('plages.destroy', $plage->id)}}" >
+                                    @method('delete')
+                                    @csrf
+                                        <button  onclick="deleteConfirm(event)" class="btn btn-danger">Supprimer</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
@@ -51,5 +55,17 @@
                 
             
     </section>
+    
+    <script>
+        function deleteConfirm(event){
+            event.preventDefault();
+            var form = event.target.form;
+            if (confirm("Etes vous sur de vouloir supprimer cette plage?") == true) {
+                form.submit();
+            } else {
+
+            }
+        }
+    </script>
 
 @endsection

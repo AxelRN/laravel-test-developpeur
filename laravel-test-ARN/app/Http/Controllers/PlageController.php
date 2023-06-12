@@ -78,4 +78,13 @@ class PlageController extends Controller
         return redirect()->route('plages.index')->with('success','La plage '.$plage->name.' a été modifié');
 
     }
+
+    public function destroy($id){
+
+        $plage = Plage::findOrFail($id);
+
+        $plage->delete();
+        return redirect()->route('plages.index')->with('success','La plage '.$plage->name.' a été supprimé');
+
+    }
 }
