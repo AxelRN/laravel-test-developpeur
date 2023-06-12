@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PlageController;
-use App\Http\Controllers\CommuneController;
+use App\Http\Controllers\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +15,10 @@ use App\Http\Controllers\CommuneController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PlageController::class, 'index']);
 
 Route::resource('/plages', PlageController::class);
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact/send-mail', [ContactController::class, 'submit'])->name('contact.submit');
+
