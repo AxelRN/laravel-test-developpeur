@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('communes', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable;
-            $table->string('zip')->nullable;
-            $table->string('code_insee')->nullable;
+            $table->integer('zip')->nullable;
+            $table->integer('code_insee')->nullable;
             $table->timestamps();
         });
     }
