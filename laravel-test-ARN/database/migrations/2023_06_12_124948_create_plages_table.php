@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('plages', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable;
-            $table->text('description')->nullable;
-            $table->integer('zip')->nullable;
+            $table->string('name')->nullable();
+            $table->text('description')->nullable();
+            $table->string('zip')->nullable();
             $table->timestamps();
         });
     }
