@@ -23,7 +23,7 @@
                     @if (count($communes) > 0)
                         <option disable>Choisissez une commune</option>
                         @foreach($communes as $commune)
-                            <option value="{{$commune->zip}}">{{$commune->name}}</option>
+                            <option value="{{$commune->code_insee}}">{{$commune->name}}</option>
                         @endforeach
                     @else
                         <option disable>Aucune commune trouvée</option>

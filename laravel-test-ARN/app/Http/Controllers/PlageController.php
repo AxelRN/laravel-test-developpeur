@@ -22,7 +22,7 @@ class PlageController extends Controller
             ->latest()->paginate($perPage);
         }else{
             $plages = Plage::select('plages.*', 'communes.name as commune_name')
-            ->join('communes', 'plages.zip', '=', 'communes.zip')
+            ->join('communes', 'plages.zip', '=', 'communes.code_insee')
             ->paginate($perPage);
         }
         

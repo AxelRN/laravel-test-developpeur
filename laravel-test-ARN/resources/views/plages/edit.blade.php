@@ -24,7 +24,7 @@
                     @if (count($communes) > 0)
                         <option disable>Choisissez une commune</option>
                         @foreach($communes as $commune)
-                            <option {{ (isset($plage->zip) && $plage->zip == $commune->zip ? 'selected':'' ) }} value="{{ $commune->zip }}">{{ $commune->name }}</option>
+                            <option {{ (isset($plage->zip) && $plage->zip == $commune->code_insee ? 'selected':'' ) }} value="{{ $commune->code_insee }}">{{ $commune->name }}</option>
                         @endforeach
                     @else
                         <option disable>Aucune commune trouvée</option>

@@ -20,8 +20,8 @@ class PlageSeeder extends Seeder
             $handle = fopen(public_path('plage.csv'),'r');
 
             while( ($line = fgetcsv($handle,8096)) != false){
-                $dataString = implode(', ',$line);
-                $row = explode(',',$dataString);
+                $dataString = implode('\; ',$line);
+                $row = explode('\;',$dataString);
                 yield $row;
             }
 
