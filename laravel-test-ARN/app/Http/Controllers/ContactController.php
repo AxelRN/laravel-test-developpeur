@@ -17,7 +17,7 @@ class ContactController extends Controller
         
         $request->validate([
             'name' => 'required',
-            'email' => 'required|regex:/(.+)@(.+)\.(.+)/i',
+            'email' => 'required|email:rfc',
             'message' => 'required',
         ]);
 
