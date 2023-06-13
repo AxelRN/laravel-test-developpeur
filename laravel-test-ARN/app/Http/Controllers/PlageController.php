@@ -18,7 +18,8 @@ class PlageController extends Controller
             ->where('plages.name', 'LIKE', "%$search%")
             ->orWhere('plages.zip', 'LIKE', "%$search%")
             ->orWhere('communes.name', 'LIKE', "%$search%")
-            ->join('communes', 'plages.zip', '=', 'communes.zip')
+            ->orWhere('communes.zip', 'LIKE', "%$search%")
+            ->join('communes', 'plages.zip', '=', 'communes.code_insee')
             ->latest()->paginate($perPage);
         }else{
             $plages = Plage::select('plages.*', 'communes.name as commune_name')
