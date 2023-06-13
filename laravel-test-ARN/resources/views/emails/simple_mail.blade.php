@@ -12,15 +12,18 @@
                         <div class="container px-5">
                             <!-- Contact form-->
                             <div class="bg-light rounded-4 py-5 px-4 px-md-5">
-                                <div class="text-center mb-5">
+                                <div class=" mb-5">
                                     <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-envelope"></i></div>
-                                    <h1 class="fw-bolder">{{ $mailData['title'] }}</h1>
-                                    <p class="lead fw-normal text-muted mb-0">Nom : {{ $mailData['body'] }}</p>
+                                    <h1 class="fw-bolder text-center mb-5">{{ $mailData['title'] }}</h1>
+                                    <p class="lead fw-normal text-muted mb-0">Nom : {{ $mailData['name'] }}</p>
                                     <p class="lead fw-normal text-muted mb-0">Email : {{ $mailData['email'] }}</p>
                                     @if($mailData['phone']!="")
                                         <p class="lead fw-normal text-muted mb-0">Téléphone : {{ $mailData['phone'] }}</p>
                                     @endif
-                                    <p class="lead fw-normal text-muted mb-0">Message :{{ $mailData['body'] }}</p>
+                                    <div class="lead fw-normal text-muted mb-0 mt-5 row justify-content-around">
+                                        <p class="lead fw-normal text-muted mb-0 col-md-3 col-12">Message :</p>
+                                        <p class="lead fw-normal text-muted mb-0 col-md-9 col-12">{!! nl2br($mailData['body']) !!}</p>
+                                    </div>
                         </div>
                                 
         </section>
