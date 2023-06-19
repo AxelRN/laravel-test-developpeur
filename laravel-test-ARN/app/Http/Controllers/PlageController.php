@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Plage;
 use App\Models\Commune;
+use voku\helper\AntiXSS;
 
 class PlageController extends Controller
 {
@@ -26,7 +27,7 @@ class PlageController extends Controller
             ->join('communes', 'plages.zip', '=', 'communes.code_insee')
             ->paginate($perPage);
         }
-        
+
         return view('plages.list',['plages'=>$plages])->with('i',(request()->input('page',1) -1) *$perPage);
     }
 
@@ -44,14 +45,16 @@ class PlageController extends Controller
             'zip' => 'required',
         ]);
 
+        $antiXss = new AntiXSS();
+
         $plage = new Plage;
-        $plage->name = $request->name;
-        $plage->zip = $request->zip;
-        $plage->description = ''.$request->description;
+        $plage->name = $antiXss->xss_clean($request->name);
+        $plage->zip = $antiXss->xss_clean($request->zip);
+        $plage->description = ''.$antiXss->xss_clean($request->description);
 
         $plage->save();
         return redirect()->route('plages.index')->with('success','La plage '.$plage->name.' a été ajoutée');
-        
+
     }
 
     public function edit($id){
@@ -70,10 +73,12 @@ class PlageController extends Controller
             'zip' => 'required',
         ]);
 
+        $antiXss = new AntiXSS();
+
         $plage = Plage::find($request->hidden_id);
-        $plage->name = $request->name;
-        $plage->zip = $request->zip;
-        $plage->description = ''.$request->description;
+        $plage->name = $antiXss->xss_clean($request->name);
+        $plage->zip = $antiXss->xss_clean($request->zip);
+        $plage->description = ''.$antiXss->xss_clean($request->description);
 
         $plage->save();
         return redirect()->route('plages.index')->with('success','La plage '.$plage->name.' a été modifiée');

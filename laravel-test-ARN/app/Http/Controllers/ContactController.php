@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Mail;
 use App\Mail\TestMail;
+use voku\helper\AntiXSS;
 
 class ContactController extends Controller
 {
@@ -14,19 +15,21 @@ class ContactController extends Controller
     }
 
     public function submit(Request $request){
-        
+
         $request->validate([
             'name' => 'required',
             'email' => 'required|email:rfc',
             'message' => 'required',
         ]);
 
+        $antiXss = new AntiXSS();
+
         $mailData = [
             'title' => 'Mail from laravel-test-ARN',
-            'name' => ''.$request->name,
-            'email' => ''.$request->email,
-            'phone' => ''.$request->phone,
-            'body' => ''.$request->message,
+            'name' => ''.$antiXss->xss_clean($request->name),
+            'email' => ''.$antiXss->xss_clean($request->email),
+            'phone' => ''.$antiXss->xss_clean($request->phone),
+            'body' => ''.$antiXss->xss_clean($request->message),
         ];
 
         Mail::to('robertnaudinaxel@gmail.com')->send(new TestMail($mailData));

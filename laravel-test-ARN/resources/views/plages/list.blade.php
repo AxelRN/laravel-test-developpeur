@@ -3,7 +3,7 @@
 
     <section>
         <a href="{{ route('plages.create')}}" class="btn btn-secondary mb-3">Ajouter une plage</a>
-        
+
         <form class="col-6" method="get" action="{{ route('plages.index') }}" accept-charset="UTF-8" role="search">
             <div class="input-group mb-3">
                 <input type="text" name="search" class="form-control" placeholder="Trouver une plage..." value="{{ request('search') }}">
@@ -52,10 +52,10 @@
         </table>
 
         {{ $plages->links('layouts.pagination') }}
-                
-            
+
+
     </section>
-    
+
     <script>
         function deleteConfirm(event){
             event.preventDefault();

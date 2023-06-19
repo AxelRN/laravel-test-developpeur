@@ -6,7 +6,7 @@
     <title>Liste : Plage de Martinique</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
-<body>   
+<body>
     <div class="container">
         <section class="py-5">
                         <div class="container px-5">
@@ -22,10 +22,10 @@
                                     @endif
                                     <div class="lead fw-normal text-muted mb-0 mt-5 row justify-content-around">
                                         <p class="lead fw-normal text-muted mb-0 col-md-3 col-12">Message :</p>
-                                        <p class="lead fw-normal text-muted mb-0 col-md-9 col-12">{!! nl2br($mailData['body']) !!}</p>
+                                        <p class="lead fw-normal text-muted mb-0 col-md-9 col-12">{!! nl2br(e($mailData['body'])) !!}</p>
                                     </div>
                         </div>
-                                
+
         </section>
         </div>
 </body>
