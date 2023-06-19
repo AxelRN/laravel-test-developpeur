@@ -19,9 +19,7 @@ class CommuneSeeder extends Seeder
         LazyCollection::make(function(){
             $handle = fopen(public_path('commune.csv'),'r');
 
-            while( ($line = fgetcsv($handle,8096)) != false){
-                $dataString = implode('; ',$line);
-                $row = explode(';',$dataString);
+            while( ($row = fgetcsv($handle,4096)) != false){
                 yield $row;
             }
 
