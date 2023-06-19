@@ -18,25 +18,25 @@
                                             <li>{{$error}}</li>
                                         @endforeach
                                     </ul>
-                                </div>                
+                                </div>
                             @endif
                             <form method="post" action="{{ route('contact.submit') }}">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="nom" class="form-label">Nom*</label>
-                                    <input type="text" class="form-control" id="nom" name="name" required>
+                                    <input type="text" class="form-control" id="nom" name="name" value="{{old('name')}}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="nom" class="form-label">Email*</label>
-                                    <input type="text" class="form-control" id="email" name="email" required>
+                                    <input type="text" class="form-control" id="email" name="email" value="{{old('email')}}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="nom" class="form-label">Téléphone</label>
-                                    <input type="text" class="form-control" id="phone" name="phone">
+                                    <input type="text" class="form-control" id="phone" name="phone" value="{{old('phone')}}">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="description" class="form-label">Message</label>
-                                    <textarea class="form-control"  name="message" id="message" rows="5"></textarea>
+                                    <label for="description" class="form-label">Message*</label>
+                                    <textarea class="form-control"  name="message" id="message" rows="5">{{old('message')}}</textarea>
                                 </div>
 
                                 <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">Envoyer</button></div>

@@ -9,7 +9,7 @@
                         <li>{{$error}}</li>
                     @endforeach
                 </ul>
-            </div>                
+            </div>
         @endif
         <form method="post" action="{{ route('plages.update', $plage->id) }}">
             @csrf
@@ -22,12 +22,12 @@
                 <label for="commune" class="form-label">Commune*</label>
                 <select class="form-select" id="commune" name="zip" required>
                     @if (count($communes) > 0)
-                        <option disable>Choisissez une commune</option>
+                        <option disabled>Choisissez une commune</option>
                         @foreach($communes as $commune)
                             <option {{ (isset($plage->zip) && $plage->zip == $commune->code_insee ? 'selected':'' ) }} value="{{ $commune->code_insee }}">{{ $commune->name }}</option>
                         @endforeach
                     @else
-                        <option disable>Aucune commune trouvée</option>
+                        <option disabled>Aucune commune trouvée</option>
                     @endif
                 </select>
             </div>

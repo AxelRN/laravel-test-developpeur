@@ -9,30 +9,30 @@
                         <li>{{$error}}</li>
                     @endforeach
                 </ul>
-            </div>                
+            </div>
         @endif
         <form method="post" action="{{ route('plages.store') }}">
             @csrf
             <div class="mb-3">
                 <label for="nom" class="form-label">Nom*</label>
-                <input type="text" class="form-control" id="nom" name="name" required>
+                <input type="text" class="form-control" id="nom" name="name" value="{{old('name')}}" >
             </div>
             <div class="mb-3">
                 <label for="commune" class="form-label">Commune*</label>
-                <select class="form-select" id="commune" name="zip" required>
+                <select class="form-select" id="commune" name="zip" >
                     @if (count($communes) > 0)
-                        <option disable>Choisissez une commune</option>
+                        <option disabled>Choisissez une commune</option>
                         @foreach($communes as $commune)
-                            <option value="{{$commune->code_insee}}">{{$commune->name}}</option>
+                            <option {{ (old('zip') && old('zip') == $commune->code_insee ? 'selected':'' ) }} value="{{$commune->code_insee}}">{{$commune->name}}</option>
                         @endforeach
                     @else
-                        <option disable>Aucune commune trouvée</option>
+                        <option disabled>Aucune commune trouvée</option>
                     @endif
                 </select>
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control"  name="description" id="description" rows="15"></textarea>
+                <textarea class="form-control"  name="description" id="description" rows="15">{{old('description')}}</textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Ajouter</button>
