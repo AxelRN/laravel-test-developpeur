@@ -34,7 +34,12 @@ class ContactController extends Controller
 
         Mail::to('robertnaudinaxel@gmail.com')->send(new TestMail($mailData));
 
-        return view('contact_success');
+        return redirect()->route('contact.success');
 
+    }
+
+    public function success(){
+
+        return view('contact_success');
     }
 }

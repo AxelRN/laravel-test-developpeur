@@ -21,5 +21,7 @@ Route::resource('/plages', PlageController::class);
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 
+Route::get('/contact-success', [ContactController::class, 'success'])->name('contact.success');
+
 Route::post('/contact/send-mail', [ContactController::class, 'submit'])->name('contact.submit');
 
