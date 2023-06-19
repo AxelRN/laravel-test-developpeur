@@ -15,17 +15,14 @@ class PlageController extends Controller
         $perPage = 5;
 
         if(!empty($search)){
-            $plages = Plage::select('plages.*', 'communes.name as commune_name')
-            ->where('plages.name', 'LIKE', "%$search%")
-            ->orWhere('plages.zip', 'LIKE', "%$search%")
-            ->orWhere('communes.name', 'LIKE', "%$search%")
-            ->orWhere('communes.zip', 'LIKE', "%$search%")
-            ->join('communes', 'plages.zip', '=', 'communes.code_insee')
-            ->latest()->paginate($perPage);
+            $plages = Plage::where('name', 'LIKE', "%$search%")
+                ->orWhere('zip', 'LIKE', "%$search%")
+                ->with('commune')
+                ->latest()
+                ->paginate($perPage);
         }else{
-            $plages = Plage::select('plages.*', 'communes.name as commune_name')
-            ->join('communes', 'plages.zip', '=', 'communes.code_insee')
-            ->paginate($perPage);
+            $plages = Plage::with('commune')
+                ->paginate($perPage);
         }
 
         return view('plages.list',['plages'=>$plages])->with('i',(request()->input('page',1) -1) *$perPage);

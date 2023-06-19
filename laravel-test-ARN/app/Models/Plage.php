@@ -10,4 +10,9 @@ class Plage extends Model
     use HasFactory;
 
     protected $fillable = ['name','description','zip'];
+
+    public function commune()
+    {
+        return $this->belongsTo(Commune::class, 'zip', 'code_insee');
+    }
 }

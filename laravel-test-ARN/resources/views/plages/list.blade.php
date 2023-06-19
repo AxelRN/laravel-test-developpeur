@@ -33,7 +33,7 @@
                         <tr>
                             <th scope="row">{{$plage->id}}</th>
                             <td>{{$plage->name}}</td>
-                            <td>{{$plage->commune_name}}</td>
+                            <td>{{$plage->commune->name}}</td>
                             <td>{!!$plage->description!!}</td>
                             <td>
                                 <a href="{{ route('plages.edit', $plage->id) }}" class="btn btn-primary">Modifier</a>
