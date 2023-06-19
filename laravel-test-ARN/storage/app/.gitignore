@@ -1,3 +1,5 @@
 *
 !public/
 !.gitignore
+!commune.csv
+!plage.csv

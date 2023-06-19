@@ -17,7 +17,7 @@ class CommuneSeeder extends Seeder
         DB::disableQueryLog();
 
         LazyCollection::make(function(){
-            $handle = fopen(public_path('commune.csv'),'r');
+            $handle = fopen(storage_path('app/commune.csv'),'r');
 
             while( ($row = fgetcsv($handle,4096)) != false){
                 yield $row;

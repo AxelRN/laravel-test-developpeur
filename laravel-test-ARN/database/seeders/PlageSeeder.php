@@ -17,7 +17,7 @@ class PlageSeeder extends Seeder
         DB::disableQueryLog();
 
         LazyCollection::make(function(){
-            $handle = fopen(public_path('plage.csv'),'r');
+            $handle = fopen(storage_path('app/plage.csv'),'r');
 
             while( ($row = fgetcsv($handle,4096)) != false){
                 yield $row;
