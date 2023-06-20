@@ -10,4 +10,9 @@ class Commune extends Model
     use HasFactory;
 
     protected $fillable = ['name','zip','code_insee'];
+
+    public function plages()
+    {
+        return $this->hasMany(Plage::class, 'zip', 'zip');
+    }
 }

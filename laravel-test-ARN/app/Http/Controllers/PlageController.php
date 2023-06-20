@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Plage;
 use App\Models\Commune;
 use voku\helper\AntiXSS;
+use App\Http\Requests\StorePlageRequest;
 
 class PlageController extends Controller
 {
@@ -14,16 +15,13 @@ class PlageController extends Controller
         $search = $request->get('search');
         $perPage = 5;
 
-        if(!empty($search)){
-            $plages = Plage::where('name', 'LIKE', "%$search%")
-                ->orWhere('zip', 'LIKE', "%$search%")
-                ->with('commune')
-                ->latest()
-                ->paginate($perPage);
-        }else{
-            $plages = Plage::with('commune')
-                ->paginate($perPage);
-        }
+        $plages = Plage::with('commune')
+            ->when($search, function ($query) use ($search) {
+                $query->where('name', 'LIKE', "%$search%")
+                    ->orWhere('zip', 'LIKE', "%$search%");
+            })
+            ->latest()
+            ->paginate($perPage);
 
         return view('plages.list',['plages'=>$plages])->with('i',(request()->input('page',1) -1) *$perPage);
     }
@@ -35,12 +33,7 @@ class PlageController extends Controller
         return view('plages.add',['communes'=>$communes]);
     }
 
-    public function store(Request $request){
-
-        $request->validate([
-            'name' => 'required',
-            'zip' => 'required',
-        ]);
+    public function store(StorePlageRequest $request){
 
         $antiXss = new AntiXSS();
 
@@ -54,25 +47,20 @@ class PlageController extends Controller
 
     }
 
-    public function edit($id){
+    public function edit(Plage $plage)
+    {
 
-        $plage = Plage::findOrFail($id);
         $communes = Commune::orderby('name')->get();
 
         return view('plages.edit',['plage'=>$plage,'communes'=>$communes]);
 
     }
 
-    public function update(Request $request, Plage $plage){
-
-        $request->validate([
-            'name' => 'required',
-            'zip' => 'required',
-        ]);
+    public function update(StorePlageRequest $request, Plage $plage)
+    {
 
         $antiXss = new AntiXSS();
 
-        $plage = Plage::find($request->hidden_id);
         $plage->name = $antiXss->xss_clean($request->name);
         $plage->zip = $antiXss->xss_clean($request->zip);
         $plage->description = ''.$antiXss->xss_clean($request->description);
@@ -82,7 +70,8 @@ class PlageController extends Controller
 
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
 
         $plage = Plage::findOrFail($id);
 

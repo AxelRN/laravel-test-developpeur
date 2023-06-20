@@ -11,12 +11,12 @@
                 </ul>
             </div>
         @endif
-        <form method="post" action="{{ route('plages.update', $plage->id) }}">
+        <form method="post" action="{{ route('plages.update', $plage) }}">
             @csrf
             @method('PUT')
             <div class="mb-3">
                 <label for="nom" class="form-label">Nom*</label>
-                <input type="text" class="form-control" id="nom" name="name" value="{{ $plage->name }}" required>
+                <input type="text" class="form-control" id="nom" name="name" value="{{ old('name',$plage->name) }}" required>
             </div>
             <div class="mb-3">
                 <label for="commune" class="form-label">Commune*</label>
@@ -24,7 +24,7 @@
                     @if (count($communes) > 0)
                         <option disabled>Choisissez une commune</option>
                         @foreach($communes as $commune)
-                            <option {{ (isset($plage->zip) && $plage->zip == $commune->code_insee ? 'selected':'' ) }} value="{{ $commune->code_insee }}">{{ $commune->name }}</option>
+                            <option {{ ( old('zip',$plage->zip) == $commune->code_insee ? 'selected':'' ) }} value="{{ $commune->code_insee }}">{{ $commune->name }}</option>
                         @endforeach
                     @else
                         <option disabled>Aucune commune trouvée</option>
@@ -33,10 +33,9 @@
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control"  name="description" id="description" rows="15">{{ $plage->description }}</textarea>
+                <textarea class="form-control"  name="description" id="description" rows="15">{{ old('description',$plage->description) }}</textarea>
             </div>
 
-            <input type="hidden" name="hidden_id" value="{{$plage->id}}">
 
             <button type="submit" class="btn btn-primary">Ajouter</button>
         </form>

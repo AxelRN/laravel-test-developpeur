@@ -18,6 +18,7 @@ use App\Http\Controllers\ContactController;
 Route::get('/', [PlageController::class, 'index']);
 
 Route::resource('/plages', PlageController::class);
+//Route::resource('plages', PlageController::class);
 
 Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
 
